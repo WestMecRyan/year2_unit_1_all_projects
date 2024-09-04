@@ -2,7 +2,7 @@ Exercises
 Starting directory: C:\Users[YourUsername]\Documents\Local_Dev\unit1\command_practice_folder
 
 Create the following directory structure:
-Copyproject_alpha/
+project_alpha/
 ├── docs/
 ├── src/
 │   ├── module1/
