@@ -10,5 +10,12 @@
     "messages": [
       "hello"
     ]
+  },
+  {
+    "name": "Ryan",
+    "email": "ryan@email.com",
+    "messages": [
+      "What's up Chum!"
+    ]
   }
 ]
