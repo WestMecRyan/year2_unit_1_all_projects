@@ -53,6 +53,18 @@ app.post('/submit-form', async (req, res) => {
     }
 });
 
+app.put('/update-user/:currentName/:currentEmail', (req, res) => {
+    try {
+        // throw new Error("bad put request");
+        res.status(200);
+        res.send('Your put request was received');
+    } catch (error) {
+        console.error('there was a problem', error);
+        res.status(500)
+        res.send('An error occured during PUT');
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

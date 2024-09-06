@@ -50,13 +50,19 @@
             // throw new Error("it didn't work");
             const response = await fetch(
               `/update-user/${currentName}/${currentEmail}`,
-            {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({newName, newEmail})
-            });
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ newName, newEmail }),
+              }
+            );
+            if (!response.ok) {
+              alert(response);
+            }
+            const data = await JSON.parse(response.text());
+            alert(data);
           } catch (error) {
             alert("Error updating user: " + error.message);
           }
