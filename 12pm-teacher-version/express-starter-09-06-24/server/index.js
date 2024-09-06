@@ -49,7 +49,7 @@ app.post('/submit-form', async (req, res) => {
         res.redirect('/form');
     } catch (error) {
         console.error('Error processing form:', error);
-        res.status(500).send('An error occurred while processing your submission.');
+        res.status(500).json({ error: 'An error occurred while processing your submission.' });
     }
 });
 
@@ -57,17 +57,16 @@ app.put('/update-user/:currentName/:currentEmail', (req, res) => {
     try {
         const { currentName, currentEmail } = req.params;
         const { newName, newEmail } = req.body;
-        console.log(currentName);
-        console.log(currentEmail);
-        console.log(newName);
-        console.log(newEmail);
+        console.log("current name:", currentName);
+        console.log("current email:", currentEmail);
+        console.log("new name:", newName);
+        console.log("new email:", newEmail);
         // throw new Error("bad put request");
-        res.status(200);
-        res.send('Your put request was received');
+        res.status(200).json({ message: 'Your put request was received' });
     } catch (error) {
         console.error('there was a problem', error);
         res.status(500)
-        res.send('An error occured during PUT');
+        res.json({ error: 'An error occured during PUT' });
     }
 });
 
