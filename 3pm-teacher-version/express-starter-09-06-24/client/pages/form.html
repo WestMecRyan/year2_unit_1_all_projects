@@ -40,9 +40,26 @@
         .getElementById("updateForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
+          const currentName = document.getElementById("currentName").value;
+          const currentEmail = document.getElementById("currentEmail").value;
+          const newName = document.getElementById("newName").value;
+          const newEmail = document.getElementById("newEmail").value;
           try {
+            throw new Error("Something went wrong");
+            const response = await fetch(
+              `/update-user/${currentName}/${currentEmail}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ newName, newEmail }),
+              }
+            );
+            const data = await response.json();
+            console.log(data);
           } catch (error) {
-            alert("Error updating user: " + error.message);
+            alert("Error updating user: ", error);
           }
         });
     </script>
