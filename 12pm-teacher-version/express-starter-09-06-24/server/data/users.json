@@ -1,0 +1,14 @@
+[
+  {
+    "name": "default",
+    "email": "default@email.com",
+    "messages": []
+  },
+  {
+    "name": "Jim",
+    "email": "j@jim.com",
+    "messages": [
+      "hello"
+    ]
+  }
+]
