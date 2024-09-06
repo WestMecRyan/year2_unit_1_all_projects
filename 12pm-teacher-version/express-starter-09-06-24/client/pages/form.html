@@ -61,7 +61,7 @@
             if (!response.ok) {
               alert(response);
             }
-            const data = await JSON.parse(response.text());
+            const data = await response.text();
             alert(data);
           } catch (error) {
             alert("Error updating user: " + error.message);

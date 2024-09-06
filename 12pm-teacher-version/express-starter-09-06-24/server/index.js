@@ -55,6 +55,12 @@ app.post('/submit-form', async (req, res) => {
 
 app.put('/update-user/:currentName/:currentEmail', (req, res) => {
     try {
+        const { currentName, currentEmail } = req.params;
+        const { newName, newEmail } = req.body;
+        console.log(currentName);
+        console.log(currentEmail);
+        console.log(newName);
+        console.log(newEmail);
         // throw new Error("bad put request");
         res.status(200);
         res.send('Your put request was received');
