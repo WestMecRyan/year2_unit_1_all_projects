@@ -24,7 +24,7 @@
       <input type="submit" value="Submit" />
     </form>
     <h1>User Management</h1>
-    <form id="updatedForm">
+    <form id="updateForm">
       <label for="currentName">Current name:</label>
       <input type="text" id="currentName" required /><br /><br />
       <label for="currentEmail">Current email:</label>
@@ -59,7 +59,7 @@
             const data = await response.json();
             console.log(data);
           } catch (error) {
-            alert("Error updating user: ", error);
+            alert("Error updating user: " + error.message);
           }
         });
     </script>
