@@ -53,6 +53,18 @@ app.post('/submit-form', async (req, res) => {
     }
 });
 
+app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
+    try {
+        console.log(req.params);
+        console.log(req.body);
+        const { currentName, currentEmail } = req.params;
+        const { newName, newEmail } = req.body;
+        res.status(200).json({ message: `You sent ${newName} and ${newEmail}` })
+    } catch (error) {
+
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
