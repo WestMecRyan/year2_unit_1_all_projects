@@ -15,21 +15,25 @@ const users = [
 function findUserById(id) {
   // Your code here
 }
+// log the users whose id's are 5 and 7
 
 // 2. Filter users by city
 function filterUsersByCity(city) {
   // Your code here
 }
+// create two arrayy of users whose cities are Chicago and New York
 
 // 3. Get all users over a certain age
 function getUsersOverAge(age) {
   // Your code here
 }
+// save users who are younger than 30 in an array could under30Demo
 
 // 4. Add a new message to a user's messages array
 function addMessageToUser(userId, message) {
   // Your code here
 }
+//
 
 // 5. Update a user's email
 function updateUserEmail(userId, newEmail) {
@@ -61,7 +65,6 @@ function sortUsersByAge() {
   // Your code here
 }
 
-// Test your functions here
-console.log(findUserById(3));
-console.log(filterUsersByCity("New York"));
-// ... add more test calls for other functions
+// answers for log of first two problems
+console.log(findUserById(5));
+console.log(filterUsersByCity("Chicago"));
