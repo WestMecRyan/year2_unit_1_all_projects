@@ -9,6 +9,7 @@ const dataPath = path.join(__dirname, 'data', 'users.json');
 // Middleware
 app.use(express.static(clientPath));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
@@ -49,6 +50,18 @@ app.post('/submit-form', async (req, res) => {
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).send('An error occurred while processing your submission.');
+    }
+});
+
+app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
+    try {
+        console.log(req.params);
+        console.log(req.body);
+        const { currentName, currentEmail } = req.params;
+        const { newName, newEmail } = req.body;
+        res.status(200).json({ message: `You sent ${newName} and ${newEmail}` })
+    } catch (error) {
+
     }
 });
 

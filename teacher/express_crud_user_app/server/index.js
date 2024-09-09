@@ -1,85 +1,82 @@
-// require express as express
+// Required modules
 const express = require('express');
-// require path as path
 const path = require('path');
-// require fs as fs
 const fs = require('fs').promises;
-// cache the express module as 'app'
-const app = express();
-// cache the client directory as 'clientPath' using path.join
-const clientPath = path.join(__dirname, '..', 'client');
-// create a path for the data
-const dataPath = path.join(__dirname, 'data', 'users.json');
-// use the static middleware to serve the client folder
-app.use(express.static(clientPath));
-// allow parsing form data with the urlencoded package
-app.use(express.urlencoded({ extended: true }));
-// get the '/' endpoint
-// test it with a basic 200 and end response
-app.get('/', (req, res) => {
-    res
-        .status(200)
-        .send('It works!');
-});
-app.get('/', (req, res) => {
-    res
-        // sendFile sets the header content type based on the extension of the file name
-        .sendFile('index.html', { root: clientPath }, (err) => { // 3 params , endpoint, path, and arrow function pass an err
-            if (err) {
-                console.error('error sending file:', err);
-                res.status(500).send('error sending file');
-            } else {
-                res.status(200); // this is set by sendFile
-                res.set('Content-Type', 'text/html'); // this is set by sendfile
-                console.log('file sent successfully');
-            }
-        });
-});
-// then send the index.html file
-// use error handling to catch sendFile errors
 
-// practice get the '/about' endpoint and serve an about page
-// serve the form file
+// Initialize Express application
+const app = express();
+
+// Define paths
+const clientPath = path.join(__dirname, '..', 'client');
+const dataPath = path.join(__dirname, 'data', 'users.json');
+
+// Middleware setup
+app.use(express.static(clientPath)); // Serve static files from client directory
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.json()); // Parse JSON bodies
+
+// Routes
+
+// Home route
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: clientPath });
+});
+
+// Form route
 app.get('/form', (req, res) => {
     res.sendFile('pages/form.html', { root: clientPath });
 });
-// use a post request to parse the request from the form
-// assign the data to the users array
-app.post('/submit-form', async (req, res) => { // make the function asynchronous with the async keyword
-    // make a try catch block to handle errors from the request body
+
+// Form submission route
+app.post('/submit-form', async (req, res) => {
     try {
-        // destructure the name, email and message from the req.body
-        // initialize an empty users array to hold the data from the file
-        // make a try catch block to await the reading of the file
+        const { name, email, message } = req.body;
+
+        // Read existing users from file
         let users = [];
         try {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
         } catch (error) {
-            users = [{ "name": "default", "email": "default@email.com", "messages": [] }];
-            console.error('error parsing file, users is set to default ');
+            // If file doesn't exist or is empty, start with an empty array
+            console.error('Error reading user data:', error);
+            users = [];
         }
-        // find or create the user with a find method (check if user exists with same name and email in database
+
+        // Find or create user
+        let user = users.find(u => u.name === name && u.email === email);
+        if (user) {
+            user.messages.push(message);
+        } else {
+            user = { name, email, messages: [message] };
+            users.push(user);
+        }
+
+        // Save updated users
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
         res.redirect('/form');
-        // if the user existis push the message to tehir array
-        // else create the user with the destructured request body
-        // push the user to the users array
-
-        // asynchronously write the data with writeFile method
-
-        // redirect back to the form homepage
-
-    } catch (error) { // describe if there is an error processing the form
-        console.error('Error processing the form: ', error);
-        res.status(500).send('an error occured while processing');
-
+    } catch (error) {
+        console.error('Error processing form:', error);
+        res.status(500).send('An error occurred while processing your submission.');
     }
 });
-// cache a PORT to process.envPORT || 3000
+
+// Update user route (currently just logs and sends a response)
+app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
+    try {
+        const { currentName, currentEmail } = req.params;
+        const { newName, newEmail } = req.body;
+        console.log('Current user:', { currentName, currentEmail });
+        console.log('New user data:', { newName, newEmail });
+        res.status(200).json({ message: `You sent ${newName} and ${newEmail}` });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).send('An error occurred while updating the user.');
+    }
+});
+
+// Start the server
 const PORT = process.env.PORT || 3000;
-// listen on the PORT server
-// log that the server is runnig
 app.listen(PORT, () => {
-    console.log(`Server is listening on PORT ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
