@@ -14,12 +14,15 @@ const users = [
 // 1. Find a user by ID
 function findUserById(id) {
   // Your code here
+  return users.find(user => user.id === id);
 }
-
+// log user whose id is 7 and user whose id is 5
+console.log(findUserById(5));
 // 2. Filter users by city
 function filterUsersByCity(city) {
   // Your code here
 }
+// make array of users who live in chicago
 
 // 3. Get all users over a certain age
 function getUsersOverAge(age) {
