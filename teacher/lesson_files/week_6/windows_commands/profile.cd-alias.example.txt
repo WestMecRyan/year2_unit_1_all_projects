@@ -1,0 +1,20 @@
+# Function to navigate to a documents folder
+# C:\Users\user.name\Documents\Local_Dev
+#function cd-dev {
+#    Set-Location "C:\Users\ryan.morales\Documents\Local_Dev"
+#}
+
+function cd-dev {
+    param (
+        [string]$SubPath = ""
+    )
+
+    # Base path for the 'dev' directory
+    $basePath = "C:\Users\ryan.morales\Documents\Local_Dev"
+
+    # Combine base path with the subpath
+    $fullPath = Join-Path -Path $basePath -ChildPath $SubPath
+
+    # Change directory
+    Set-Location -Path $fullPath
+}
