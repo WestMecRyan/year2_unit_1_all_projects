@@ -13,8 +13,9 @@ const users = [
 
 // 1. Find a user by ID
 function findUserById(id) {
-  // Your code here
+  return users.find(user => user.id === id);
 }
+const fifthUser = findUserById(5);
 // log the users whose id's are 5 and 7
 
 // 2. Filter users by city
