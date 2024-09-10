@@ -22,6 +22,16 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
 });
 
+app.get('/users', async (req, res) => {
+    try {
+        const data = await fs.readFile(dataPath, 'utf8');
+        const users = JSON.parse(data);
+        res.json(users);
+    } catch (error) {
+        console.error("There was a problem");
+    }
+ });
+
 // Form route
 app.get('/form', (req, res) => {
     res.sendFile('pages/form.html', { root: clientPath });
