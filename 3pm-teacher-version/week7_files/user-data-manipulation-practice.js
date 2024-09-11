@@ -82,15 +82,34 @@ function addMessageToUser(userId, message) {
 const response = addMessageToUser(1, "Wassup");
 if (response) {
   console.log("Success adding user message");
+  console.log(findUserById(1));
 } else {
   console.warn("Failed to add message to user");
 }
-
-// 5. Update a user's email
-function updateUserEmail(userId, newEmail) {
-  // Your code here
+{
+  // 5. Update a user's email
+  function updateUserEmail(userId, newEmail) {
+    try {
+      const user = findUserById(userId);
+      if (user) {
+        // change email
+        user.email = newEmail;
+        return true; // res.status(200).json({message: "update email successful"})
+      } else {
+        throw new Error("User not found 404");
+      }
+    } catch (error) {
+      console.error("There was a problem " + error.message);
+      return false; // res.status(404).json({error: "404 user not found"});
+    }
+  }
+  const response = updateUserEmail(2, "bob2@email.com");
+  if (response) {
+    console.log("success, updating user email");
+  } else {
+    console.error("You failed! Go to jail");
+  }
 }
-
 // 6. Get all users with no messages
 function getUsersWithNoMessages() {
   // Your code here
