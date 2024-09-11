@@ -10,6 +10,24 @@ const users = [
 ];
 
 // Practice Activities
+function findUserByName(name) {
+  return users.find(user => user.name === name);
+}
+console.log(findUserByName("Fiona Apple"));
+
+// function findUsersByAge(age) {
+//   return users.filter(user=>user.age>age);
+// }
+const findUsersByAge = age => users.filter(user => user.age > age);
+const numbers = [1, 2, 3]
+function multiplyNums(arr, x) {
+  return arr.map(num => num * x);
+}
+console.log(multiplyNums(numbers, 1025));
+
+
+const oldActors = findUsersByAge(30);
+console.log(oldActors);
 
 // 1. Find a user by ID
 function findUserById(id) {
@@ -21,19 +39,43 @@ const fifthUser = findUserById(5);
 // 2. Filter users by city
 function filterUsersByCity(city) {
   // Your code here
+  return users.filter(user => user.city === city);
 }
+const NewYorkers = filterUsersByCity("New York");
+console.log(NewYorkers);
+const Chicagoans = filterUsersByCity("Chicago");
+console.log(Chicagoans);
 // create two arrayy of users whose cities are Chicago and New York
 
 // 3. Get all users over a certain age
 function getUsersOverAge(age) {
   // Your code here
+  return users.filter(user => user.age > age);
 }
+const olderActors = getUsersOverAge(30);
+console.log(olderActors);
 // save users who are younger than 30 in an array could under30Demo
 
 // 4. Add a new message to a user's messages array
 function addMessageToUser(userId, message) {
-  // Your code here
+  // utilize a try catch block
+  try {
+    // cache a user to a function call
+    const user = findUserById(userId);
+    if (user) {
+      user.messages.push(message);
+      console.log(user);
+    } else {
+      throw new Error("user does not exist");
+    }
+    // if the user exists/not undefined
+    // push the message to their messages
+    // else throw new Error("user does not exist")
+  } catch (error) {
+    console.error("There was an error" + error.message);
+  }
 }
+console.log(addMessageToUser(100, "Hello"));
 //
 
 // 5. Update a user's email
@@ -67,5 +109,5 @@ function sortUsersByAge() {
 }
 
 // answers for log of first two problems
-console.log(findUserById(5));
-console.log(filterUsersByCity("Chicago"));
+// console.log(findUserById(5));
+// console.log(filterUsersByCity("Chicago"));
