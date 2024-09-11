@@ -17,21 +17,44 @@ function findUserById(id) {
   return users.find(user => user.id === id);
 }
 // log user whose id is 7 and user whose id is 5
-console.log(findUserById(5));
+// console.log(findUserById(5));
 // 2. Filter users by city
 function filterUsersByCity(city) {
-  // Your code here
+  return users.filter(user => user.city === city);
 }
+const NewYorkers = filterUsersByCity("New York");
+const Chicagoans = filterUsersByCity("Chicago");
+// console.log(Chicagoans);
 // make array of users who live in chicago
 
 // 3. Get all users over a certain age
-function getUsersOverAge(age) {
-  // Your code here
-}
+// function getUsersOverAge(age) {
+//   return users.filter((user) => { return user.age > age });
+// }
+const getUsersOverAge = age => users.filter(user => user.age > age);
+
+
+
+
+// const getUsersOverAge = (age) => {
+//   return users.filter((user) => { return user.age > age });
+// }
+// const getUsersOverAge = age => users.filter(user => user.age > age);
+
+
+const usersOver30 = getUsersOverAge(30);
+console.log("users over 30", usersOver30);
+// cache and log an array of all users over the age of 30
 
 // 4. Add a new message to a user's messages array
 function addMessageToUser(userId, message) {
-  // Your code here
+  // use an existing function
+  const user = findUserById(userId);
+  // to find a user by some id
+  // cache that user
+  user.messages.push(message);
+  // and append a message
+  // to their messages array
 }
 
 // 5. Update a user's email
@@ -65,6 +88,6 @@ function sortUsersByAge() {
 }
 
 // Test your functions here
-console.log(findUserById(3));
-console.log(filterUsersByCity("New York"));
+// // console.log(findUserById(3));
+// console.log(filterUsersByCity("New York"));
 // ... add more test calls for other functions

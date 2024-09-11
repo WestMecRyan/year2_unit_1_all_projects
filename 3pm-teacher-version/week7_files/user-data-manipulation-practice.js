@@ -13,7 +13,7 @@ const users = [
 function findUserByName(name) {
   return users.find(user => user.name === name);
 }
-console.log(findUserByName("Fiona Apple"));
+// console.log(findUserByName("Fiona Apple"));
 
 // function findUsersByAge(age) {
 //   return users.filter(user=>user.age>age);
@@ -23,17 +23,18 @@ const numbers = [1, 2, 3]
 function multiplyNums(arr, x) {
   return arr.map(num => num * x);
 }
-console.log(multiplyNums(numbers, 1025));
+// console.log(multiplyNums(numbers, 1025));
 
 
 const oldActors = findUsersByAge(30);
-console.log(oldActors);
+// console.log(oldActors);
 
 // 1. Find a user by ID
 function findUserById(id) {
   return users.find(user => user.id === id);
 }
 const fifthUser = findUserById(5);
+// console.log(fifthUser);
 // log the users whose id's are 5 and 7
 
 // 2. Filter users by city
@@ -42,9 +43,9 @@ function filterUsersByCity(city) {
   return users.filter(user => user.city === city);
 }
 const NewYorkers = filterUsersByCity("New York");
-console.log(NewYorkers);
+// console.log(NewYorkers);
 const Chicagoans = filterUsersByCity("Chicago");
-console.log(Chicagoans);
+// console.log(Chicagoans);
 // create two arrayy of users whose cities are Chicago and New York
 
 // 3. Get all users over a certain age
@@ -53,7 +54,7 @@ function getUsersOverAge(age) {
   return users.filter(user => user.age > age);
 }
 const olderActors = getUsersOverAge(30);
-console.log(olderActors);
+// console.log(olderActors);
 // save users who are younger than 30 in an array could under30Demo
 
 // 4. Add a new message to a user's messages array
@@ -64,7 +65,8 @@ function addMessageToUser(userId, message) {
     const user = findUserById(userId);
     if (user) {
       user.messages.push(message);
-      console.log(user);
+      // console.log(user);
+      return true;
     } else {
       throw new Error("user does not exist");
     }
@@ -73,10 +75,16 @@ function addMessageToUser(userId, message) {
     // else throw new Error("user does not exist")
   } catch (error) {
     console.error("There was an error" + error.message);
+    return false;
   }
 }
-console.log(addMessageToUser(100, "Hello"));
-//
+// console.log(addMessageToUser(5, "Hello"));
+const response = addMessageToUser(1, "Wassup");
+if (response) {
+  console.log("Success adding user message");
+} else {
+  console.warn("Failed to add message to user");
+}
 
 // 5. Update a user's email
 function updateUserEmail(userId, newEmail) {
