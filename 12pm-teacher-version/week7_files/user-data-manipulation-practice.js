@@ -75,9 +75,31 @@ try {
 }
 // 5. Update a user's email
 function updateUserEmail(userId, newEmail) {
-  // Your code here
+  try {
+    const user = findUserById(userId);
+    if (user) {
+      user.email = newEmail;
+      console.log(user.email);
+      return true;
+    } else {
+      throw new Error("User does not exist 404");
+    }
+  } catch (error) {
+    console.error("Something went wrong" + error.message);
+    return false;
+  }
 }
-
+// handle the response on the client side
+try {
+  const response = updateUserEmail(3, "newtest@email.com");
+  if (response) {
+    console.log("Email was updated successfully.");
+  } else {
+    throw new Error("Failed to update email.");
+  }
+} catch (error) {
+  console.error("There was a problem" + error.message)
+}
 // 6. Get all users with no messages
 function getUsersWithNoMessages() {
   // Your code here
@@ -94,10 +116,23 @@ function getUserWithMostMessages() {
 }
 
 // 9. Remove a specific message from a user
-function removeMessageFromUser(userId, message) {
-  // Your code here
+function removeMessageFromUser(userId = 3, message = "Nonsense") {
+  try {
+    const user = findUserById(userId);
+    if (user) {
+      // get the index of the specific message we want to delete
+      const messageIndex = user.messages.indexOf(message);
+      console.log("the message index was", messageIndex);
+      return true;
+    } else {
+      throw new Error("Failed to remove message")
+    }
+  } catch (error) {
+    console.error("Something went wrong" + error.message);
+    return false;
+  }
 }
-
+removeMessageFromUser();
 // 10. Sort users by age (youngest to oldest)
 function sortUsersByAge() {
   // Your code here
