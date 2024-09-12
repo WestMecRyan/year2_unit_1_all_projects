@@ -48,15 +48,31 @@ console.log("users over 30", usersOver30);
 
 // 4. Add a new message to a user's messages array
 function addMessageToUser(userId, message) {
-  // use an existing function
-  const user = findUserById(userId);
-  // to find a user by some id
-  // cache that user
-  user.messages.push(message);
-  // and append a message
-  // to their messages array
-}
+  try {
+    const user = findUserById(userId);
+    if (user) {
+      user.messages.push(message);
+      console.log(user.messages);
+      return true; // res.status(204).json({message: "Message was added successfully."})
+    } else {
+      throw new Error("User does not exist (404)");
+    }
+  } catch (error) {
+    console.error("There was a problem" + error.message);
 
+    return false; // res.status(404).json({message: "There was a problem, user not found"})
+  }
+}
+try {
+  const response = addMessageToUser(5, "Wassup chummmmmmmm...p");
+  if (response) {
+    console.log("update was successful");
+  } else {
+    throw new Error("Problem adding message");
+  }
+} catch (error) {
+  console.error("There was a problem" + error.message);
+}
 // 5. Update a user's email
 function updateUserEmail(userId, newEmail) {
   // Your code here
