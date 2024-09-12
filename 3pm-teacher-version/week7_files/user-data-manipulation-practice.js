@@ -88,6 +88,7 @@ if (response) {
 }
 {
   // 5. Update a user's email
+  //app.put(/update-user-email)
   function updateUserEmail(userId, newEmail) {
     try {
       const user = findUserById(userId);
@@ -103,6 +104,7 @@ if (response) {
       return false; // res.status(404).json({error: "404 user not found"});
     }
   }
+  // await fetch(/update-user)
   const response = updateUserEmail(2, "bob2@email.com");
   if (response) {
     console.log("success, updating user email");
@@ -126,10 +128,25 @@ function getUserWithMostMessages() {
 }
 
 // 9. Remove a specific message from a user
-function removeMessageFromUser(userId, message) {
-  // Your code here
+function removeMessageFromUser(userId = 1, message = "Hello") {
+  // cache a user by a find id function
+  try {
+    const user = findUserById(userId);
+    if (user) {
+      const messageIndex = user.messages.indexOf(message);
+      // console.log("index of hello message on userid 1", messageIndex);
+      // create an if...else to remove the existing message using the splice method
+      // research why you would NOT use the 'slice' method
+      return true;
+    }
+  } catch (error) {
+    console.error("There was a problem.");
+    return false;
+   }
+  // create a try catch block to test if user exists
+  // or throw an error and return true or false
 }
-
+removeMessageFromUser();
 // 10. Sort users by age (youngest to oldest)
 function sortUsersByAge() {
   // Your code here
