@@ -134,6 +134,9 @@ function removeMessageFromUser(userId = 1, message = "Hello") {
     const user = findUserById(userId);
     if (user) {
       const messageIndex = user.messages.indexOf(message);
+      if (messageIndex !== -1) {
+        user.messages.splice(messageIndex, 1);
+      }
       // console.log("index of hello message on userid 1", messageIndex);
       // create an if...else to remove the existing message using the splice method
       // research why you would NOT use the 'slice' method
