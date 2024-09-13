@@ -68,3 +68,4 @@ super-squad/
 
 - Implement basic error handling
 - Add simple CSS to style the forms and superhero list
+- create a delete fetch call and a delete endpoint to delete a superhero by their name
