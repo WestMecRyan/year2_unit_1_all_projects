@@ -35,6 +35,8 @@
       <input type="email" id="newEmail" required /><br /><br />
       <button type="submit">Update User</button>
     </form>
+    <h1>Show Users</h1>
+    <table id="showUsersTable"></table>
     <script>
       document
         .getElementById("updateForm")
@@ -69,13 +71,17 @@
             throw new Error("Failed to fetch users");
           }
           console.log(response);
-
           const users = await response.json();
-
           console.log(users);
+          return users;
         } catch (error) {
           console.error("There was a problem" + error);
         }
+      }
+      async function renderUsers() {
+        const users = await fetchUsers();
+        const showUserTable = document.getElementById("showUsersTable");
+        // showUserTable.innerHTML = ;
       }
       document.addEventListener("DOMContentLoaded", fetchUsers);
     </script>
