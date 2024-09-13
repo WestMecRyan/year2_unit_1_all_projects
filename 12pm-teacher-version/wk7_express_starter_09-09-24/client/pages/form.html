@@ -67,7 +67,8 @@
             );
             const data = await response.json();
             console.log(data);
-            alert("Message is: " + data.message);
+            // alert("Message is: " + data.message);
+            renderUsers();
           } catch (error) {
             alert("Error updating user: " + error.message);
           }
@@ -89,9 +90,15 @@
       async function renderUsers() {
         const users = await fetchUsers();
         const showUserTable = document.getElementById("showUsersTable");
-        // showUserTable.innerHTML = ;
+        const userTableBody = document.getElementById("userTableBody");
+        userTableBody.innerHTML = "";
+        users.forEach((user) => {
+          let row = `<tr><td>${user.name}</td><td>${user.email}</td></tr>`;
+
+          userTableBody.innerHTML += row;
+        });
       }
-      document.addEventListener("DOMContentLoaded", fetchUsers);
+      document.addEventListener("DOMContentLoaded", renderUsers);
     </script>
   </body>
 </html>
