@@ -22,6 +22,25 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
 });
 
+app.get('/users', async (req, res) => {
+    try {
+        const data = await fs.readFile(dataPath, 'utf8');
+        if (data) {
+            const users = JSON.parse(data);
+            if (users) {
+                res.status(200).json(users);
+            } else {
+                throw new Error("Error no users available");
+            }
+        } else {
+            throw new Error("error reading json file");
+        }
+    } catch (error) {
+        console.error("Problem getting users" + error.message);
+        res.status(500).json({ error: "Problem reading users" });
+    }
+});
+
 // Form route
 app.get('/form', (req, res) => {
     res.sendFile('pages/form.html', { root: clientPath });

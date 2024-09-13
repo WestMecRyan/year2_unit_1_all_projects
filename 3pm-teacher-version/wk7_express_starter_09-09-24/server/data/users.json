@@ -3,5 +3,12 @@
     "name": "default",
     "email": "default@email.com",
     "messages": []
+  },
+  {
+    "name": "bbb",
+    "email": "b@bbb.com",
+    "messages": [
+      "bbbb"
+    ]
   }
 ]
