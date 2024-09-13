@@ -87,6 +87,12 @@ app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
         const { newName, newEmail } = req.body;
         console.log('Current user:', { currentName, currentEmail });
         console.log('New user data:', { newName, newEmail });
+        const data = await fs.readFile(dataPath, 'utf8');
+        if (data) {
+            let users = JSON.parse(data);
+            const userIndex = users.findIndex(user => user.name === currentName && user.email === currentEmail);
+            console.log(userIndex);
+        }
         res.status(200).json({ message: `You sent ${newName} and ${newEmail}` });
     } catch (error) {
         console.error('Error updating user:', error);
