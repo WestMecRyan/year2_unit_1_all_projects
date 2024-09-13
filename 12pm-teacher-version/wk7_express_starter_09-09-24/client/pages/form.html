@@ -36,7 +36,15 @@
       <button type="submit">Update User</button>
     </form>
     <h1>Show Users</h1>
-    <table id="showUsersTable"></table>
+    <table id="showUsersTable">
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>User Email</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody"></tbody>
+    </table>
     <script>
       document
         .getElementById("updateForm")
