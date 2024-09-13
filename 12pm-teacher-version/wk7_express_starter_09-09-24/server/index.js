@@ -25,12 +25,17 @@ app.get('/', (req, res) => {
 app.get('/users', async (req, res) => {
     try {
         const data = await fs.readFile(dataPath, 'utf8');
-        const users = JSON.parse(data);
-        res.json(users);
+        if (data) {
+            const users = JSON.parse(data);
+            res.status(200).json(users);
+        } else {
+            throw new Error("File was not read.");
+        }
     } catch (error) {
-        console.error("There was a problem");
+        console.error("There was a problem" + error.message);
+        res.status(500).json({ error: "Problem reading user database" })
     }
- });
+});
 
 // Form route
 app.get('/form', (req, res) => {
