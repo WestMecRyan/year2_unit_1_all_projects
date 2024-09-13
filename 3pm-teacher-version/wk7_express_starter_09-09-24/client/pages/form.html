@@ -69,7 +69,7 @@
             );
             const data = await response.json();
             console.log(data);
-            fetchUsers();
+            renderUsers();
             // alert("Message is: " + data.message);
           } catch (error) {
             alert("Error updating user: " + error.message);
@@ -91,8 +91,6 @@
           console.error("There was a problem");
           console.error(error);
         }
-
-        renderUsers();
       }
       async function renderUsers() {
         const tableBody = document.getElementById("userTableBody");
@@ -107,7 +105,7 @@
           }
         } catch (error) {}
       }
-      document.addEventListener("DOMContentLoaded", fetchUsers);
+      document.addEventListener("DOMContentLoaded", renderUsers);
     </script>
   </body>
 </html>
